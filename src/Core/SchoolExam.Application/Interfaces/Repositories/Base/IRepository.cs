@@ -14,6 +14,7 @@ namespace SchoolExam.Application.Interfaces.Repositories.Base
 		Task<T> GetByIdAsync(int id, bool tracking = true);
 
 		Task<bool> AddAsync(T model);
+		bool Add(T model);
 		//Task<bool> AddRangeAsync(List<T> datas);
 		bool Remove(T model);
 		//bool RemoveRange(List<T> datas);
@@ -21,5 +22,6 @@ namespace SchoolExam.Application.Interfaces.Repositories.Base
 		bool Update(T model);
 
 		Task<bool> SaveAsync();
+		bool Save();
 	}
 }

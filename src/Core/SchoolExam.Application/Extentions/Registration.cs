@@ -17,7 +17,6 @@ namespace SchoolExam.Application.Extentions
 			var assembly = Assembly.GetExecutingAssembly();
 
 			services.AddAutoMapper(assembly);
-			services.AddValidatorsFromAssembly(assembly);
 
 			return services;
 		}

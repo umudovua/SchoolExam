@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SchoolExam.Application.DTOs.ClassRoom
 {
-	public class ClassRoomResponseDTO: BaseDTO
+	public class ClassRoomResponseDTO
 	{
 		public decimal Number { get; set; }
 		public string Name { get; set; }

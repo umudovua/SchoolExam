@@ -12,8 +12,8 @@ using SchoolExam.Persistence.Context;
 namespace SchoolExam.Persistence.Context.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241129185442_InitialMigrate")]
-    partial class InitialMigrate
+    [Migration("20241129225705_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

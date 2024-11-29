@@ -62,6 +62,14 @@ namespace SchoolExam.Infrastructure.Repositories
 
 		}
 
+		public bool Add(T model)
+		{
+			EntityEntry<T> entityEntry =  Table.Add(model);
+
+			return entityEntry.State == EntityState.Added;
+
+		}
+
 		public bool Remove(T model)
 		{
 			EntityEntry<T> entityEntry = Table.Remove(model);
@@ -83,5 +91,8 @@ namespace SchoolExam.Infrastructure.Repositories
 
 		public async Task<bool> SaveAsync()
 			 => await _context.SaveChangesAsync() > 0;
+
+		public  bool Save()
+			 =>  _context.SaveChanges() > 0;
 	}
 }

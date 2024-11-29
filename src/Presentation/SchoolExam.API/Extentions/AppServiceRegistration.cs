@@ -11,6 +11,7 @@ namespace SchoolExam.API.Extentions
 			services.AddApplicationRegistration(config);
 			services.AddInfrastructurService(config);
 			services.AddPersistenceServices(config);
+
 		}
 	}
 }

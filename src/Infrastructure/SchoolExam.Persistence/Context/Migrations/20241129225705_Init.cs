@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SchoolExam.Persistence.Context.Migrations
 {
-    public partial class InitialMigrate : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,10 +54,10 @@ namespace SchoolExam.Persistence.Context.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Number = table.Column<double>(type: "float", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     ClassRoomId = table.Column<int>(type: "int", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     Status = table.Column<byte>(type: "tinyint", nullable: false)
                 },
                 constraints: table =>
@@ -111,11 +111,11 @@ namespace SchoolExam.Persistence.Context.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ExamDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ResultGrade = table.Column<double>(type: "float", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     LessonId = table.Column<int>(type: "int", nullable: false),
                     StudentId = table.Column<int>(type: "int", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     Status = table.Column<byte>(type: "tinyint", nullable: false)
                 },
                 constraints: table =>

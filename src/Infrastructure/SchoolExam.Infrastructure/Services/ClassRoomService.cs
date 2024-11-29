@@ -22,8 +22,8 @@ namespace SchoolExam.Infrastructure.Services
             try
             {
                 var entity = _mapper.Map<ClassRoom>(addDTO);
-                await _classRoomRepository.AddAsync(entity);
-				return await _classRoomRepository.SaveAsync();
+                _classRoomRepository.Add(entity);
+				return  _classRoomRepository.Save();
             }
             catch (Exception ex)
             {
