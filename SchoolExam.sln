@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35514.174
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{06C1AE6D-D56A-4F39-A54C-D90D781B1F65}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{F2AA0AB5-2682-4B44-ABA1-696945E1891D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{644880B0-DBBD-48A5-8C50-938C6A442412}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolExam.Application", "src\Core\SchoolExam.Application\SchoolExam.Application.csproj", "{7DE55235-FEE7-44AE-9313-977D33AA2ED2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolExam.Domain", "src\Core\SchoolExam.Domain\SchoolExam.Domain.csproj", "{426287AC-F0FD-4FE0-8892-727410FEA1ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolExam.Infrastructure", "src\Infrastructure\SchoolExam.Infrastructure\SchoolExam.Infrastructure.csproj", "{9B414CF5-D0C5-490C-A72B-4FA7EB19DB46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolExam.Persistence", "src\Infrastructure\SchoolExam.Persistence\SchoolExam.Persistence.csproj", "{9A23DD7F-D034-4F82-B6AB-9CD91BAECE57}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{7E153ACF-1F0A-43A9-B752-4F831001F445}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolExam.API", "src\Presentation\SchoolExam.API\SchoolExam.API.csproj", "{78DAB91E-19CD-471E-B768-2FE33041F934}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7DE55235-FEE7-44AE-9313-977D33AA2ED2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DE55235-FEE7-44AE-9313-977D33AA2ED2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DE55235-FEE7-44AE-9313-977D33AA2ED2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DE55235-FEE7-44AE-9313-977D33AA2ED2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{426287AC-F0FD-4FE0-8892-727410FEA1ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{426287AC-F0FD-4FE0-8892-727410FEA1ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{426287AC-F0FD-4FE0-8892-727410FEA1ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{426287AC-F0FD-4FE0-8892-727410FEA1ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B414CF5-D0C5-490C-A72B-4FA7EB19DB46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B414CF5-D0C5-490C-A72B-4FA7EB19DB46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B414CF5-D0C5-490C-A72B-4FA7EB19DB46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B414CF5-D0C5-490C-A72B-4FA7EB19DB46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A23DD7F-D034-4F82-B6AB-9CD91BAECE57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A23DD7F-D034-4F82-B6AB-9CD91BAECE57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A23DD7F-D034-4F82-B6AB-9CD91BAECE57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A23DD7F-D034-4F82-B6AB-9CD91BAECE57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78DAB91E-19CD-471E-B768-2FE33041F934}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78DAB91E-19CD-471E-B768-2FE33041F934}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78DAB91E-19CD-471E-B768-2FE33041F934}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78DAB91E-19CD-471E-B768-2FE33041F934}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F2AA0AB5-2682-4B44-ABA1-696945E1891D} = {06C1AE6D-D56A-4F39-A54C-D90D781B1F65}
+		{644880B0-DBBD-48A5-8C50-938C6A442412} = {06C1AE6D-D56A-4F39-A54C-D90D781B1F65}
+		{7DE55235-FEE7-44AE-9313-977D33AA2ED2} = {F2AA0AB5-2682-4B44-ABA1-696945E1891D}
+		{426287AC-F0FD-4FE0-8892-727410FEA1ED} = {F2AA0AB5-2682-4B44-ABA1-696945E1891D}
+		{9B414CF5-D0C5-490C-A72B-4FA7EB19DB46} = {644880B0-DBBD-48A5-8C50-938C6A442412}
+		{9A23DD7F-D034-4F82-B6AB-9CD91BAECE57} = {644880B0-DBBD-48A5-8C50-938C6A442412}
+		{7E153ACF-1F0A-43A9-B752-4F831001F445} = {06C1AE6D-D56A-4F39-A54C-D90D781B1F65}
+		{78DAB91E-19CD-471E-B768-2FE33041F934} = {7E153ACF-1F0A-43A9-B752-4F831001F445}
+	EndGlobalSection
+EndGlobal
