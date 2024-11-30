@@ -1,13 +1,10 @@
 ﻿using SchoolExam.Application.DTOs.Base;
-using SchoolExam.Application.DTOs.ClassRoom;
-using SchoolExam.Application.DTOs.Teacher;
 using System.ComponentModel.DataAnnotations;
 
 namespace SchoolExam.Application.DTOs.Lesson
 {
-	public class LessonCreateDTO
+	public class LessonUpdateDTO:BaseDTO
 	{
-		
 		[Required(ErrorMessage = "This input cannot be empty")]
 		[Range(0, 99, ErrorMessage = "0-99")]
 		public string Code { get; set; }
@@ -21,6 +18,5 @@ namespace SchoolExam.Application.DTOs.Lesson
 
 		//[Required(ErrorMessage = "This input cannot be empty")]
 		public int ClassRoomId { get; set; }
-
 	}
 }

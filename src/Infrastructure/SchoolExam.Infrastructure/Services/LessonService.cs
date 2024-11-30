@@ -9,104 +9,109 @@ using SchoolExam.Domain.Entities;
 namespace SchoolExam.Infrastructure.Services
 {
 	public class LessonService : ILessonService
-    {
-        private readonly ILessonRepository _lesson;
-        private readonly IClassRoomService _classRoomService;
-        private readonly ITeacherService _teacherService;
-        private readonly IMapper _mapper;
-        public LessonService(ILessonRepository lesson, IMapper mapper, IClassRoomService classRoom, ITeacherService teacher)
-        {
-            _lesson = lesson;
-            _mapper = mapper;
-            _classRoomService = classRoom;
-            _teacherService = teacher;
-        }
+	{
+		private readonly ILessonRepository _lesson;
+		private readonly IClassRoomService _classRoomService;
+		private readonly ITeacherService _teacherService;
+		private readonly IMapper _mapper;
+		public LessonService(ILessonRepository lesson, IMapper mapper, IClassRoomService classRoom, ITeacherService teacher)
+		{
+			_lesson = lesson;
+			_mapper = mapper;
+			_classRoomService = classRoom;
+			_teacherService = teacher;
+		}
 
-        public async Task<bool> Add(LessonCreateDTO addDTO)
-        {
-            try
-            {
-                var entity = _mapper.Map<Lesson>(addDTO);
-                await _lesson.AddAsync(entity);
-				return await _lesson.SaveAsync();
+		public bool Add(LessonCreateDTO addDTO)
+		{
+			try
+			{
+				var entity = _mapper.Map<Lesson>(addDTO);
+				_lesson.Add(entity);
+				return _lesson.Save();
 
 			}
-            catch (Exception ex)
-            {
-                throw new CustomApplicationExeption(ex.Message);
-            }
-        }
+			catch (Exception ex)
+			{
+				throw new CustomApplicationExeption(ex.Message);
+			}
+		}
 
-        public async Task<bool> Delete(int id)
-        {
-            try
-            {
-                await _lesson.RemoveAsync(id);
-                return await _lesson.SaveAsync();
-            }
-            catch (Exception ex)
-            {
+		public async Task<bool> Delete(int id)
+		{
+			try
+			{
+				await _lesson.RemoveAsync(id);
+				return await _lesson.SaveAsync();
+			}
+			catch (Exception ex)
+			{
 
-                throw new CustomApplicationExeption(ex.Message); ;
-            }
-        }
+				throw new CustomApplicationExeption(ex.Message); ;
+			}
+		}
 
-        public ICollection<LessonResponseDTO> GetAll()
-        {
-            try
-            {
-                var listIndexDto = _lesson.GetAll().Include(s=>s.Teacher)
-                                          .Include(s=>s.ClassRoom)
-                                          .Select(s => new LessonResponseDTO 
-                                          { Id=s.Id,Code = s.Code, 
-                                              Name = s.Name,
-                                              TeacherFullName = s.Teacher.FirstName,ClassRoom=s.ClassRoom.Number 
-                                          });
+		public ICollection<LessonResponseDTO> GetAll()
+		{
+			try
+			{
+				var listIndexDto = _lesson.GetAll().Include(s => s.Teacher)
+										  .Include(s => s.ClassRoom)
+										  .Select(s => new LessonResponseDTO
+										  {
+											  Id = s.Id,
+											  Code = s.Code,
+											  Name = s.Name,
+											  TeacherFullName = $"{s.Teacher.FirstName} {s.Teacher.LastName}",
+											  ClassRoom = s.ClassRoom.Number
+										  });
 
-                return listIndexDto.ToList();
-            }
-            catch (Exception ex)
-            {
+				return listIndexDto.ToList();
+			}
+			catch (Exception ex)
+			{
 
-                throw new CustomApplicationExeption(ex.Message); ;
-            }
-        }
+				throw new CustomApplicationExeption(ex.Message); ;
+			}
+		}
 
-        public async Task<LessonCreateDTO> GetById(int id)
-        {
-            try
-            {
-                var data =await _lesson.GetByIdAsync(id);
+		public async Task<LessonCreateDTO> GetById(int id)
+		{
+			try
+			{
+				var data = await _lesson.GetByIdAsync(id);
 
 				var dto = _mapper.Map<LessonCreateDTO>(data);
-                return dto;
-            }
-            catch (Exception ex)
-            {
-                throw new CustomApplicationExeption(ex.Message); ;
-            }
-        }
+				return dto;
+			}
+			catch (Exception ex)
+			{
+				throw new CustomApplicationExeption(ex.Message); ;
+			}
+		}
 
-        public LessonCreateDTO Initialize(LessonCreateDTO model)
-        {
-            model.ClassRooms = _classRoomService.GetAll();
-            model.Teachers = _teacherService.GetAll();
-           return model;
-        }
+		
 
-        public Task<bool> Update(LessonCreateDTO addDTO)
-        {
-            try
-            {
-                var entity = _mapper.Map<Lesson>(addDTO);
-                var result = _lesson.Update(entity);
+		public async Task<bool> Update(LessonUpdateDTO update)
+		{
+			try
+			{
+				var lesson = await _lesson.GetByIdAsync(update.Id);
+				if (lesson != null)
+				{
+					lesson.Code = update.Code;
+					lesson.Name = update.Name;
+					lesson.TeacherId = update.TeacherId;
+					lesson.ClassRoomId = update.ClassRoomId;
+				}
+				_lesson.Update(lesson);
 
-                return _lesson.SaveAsync();
-            }
-            catch (Exception ex)
-            {
-                throw new CustomApplicationExeption(ex.Message); ;
-            }
-        }
-    }
+				return await _lesson.SaveAsync();
+			}
+			catch (Exception ex)
+			{
+				throw new CustomApplicationExeption(ex.Message); ;
+			}
+		}
+	}
 }

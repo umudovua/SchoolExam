@@ -7,6 +7,6 @@ namespace SchoolExam.Domain.Entities
 	{
 		public string FirstName { get; set; }
 		public string LastName { get; set; }
-		public Lesson Lesson { get; set; }
+		public ICollection<Lesson> Lessons { get; set; }
 	}
 }

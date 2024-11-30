@@ -14,20 +14,21 @@ namespace SchoolExam.Infrastructure.Services
         private readonly IStudentService _studentService;
         private readonly ILessonService _lessonService;
         private readonly IMapper _mapper;
-        public ExamService(IExamRepository examRepository, IMapper mapper, IStudentService studentService, ILessonService lessonService)
+        public ExamService(IExamRepository examRepository, IMapper mapper, 
+            IStudentService studentService, ILessonService lessonService)
         {
             _examRepository = examRepository;
             _mapper = mapper;
             _studentService = studentService;
             _lessonService = lessonService;
         }
-        public async Task<bool> Add(ExamCreateDTO addDTO)
+        public  bool Add(ExamCreateDTO addDTO)
         {
             try
             {
                 var entity = _mapper.Map<Exam>(addDTO);
-                await _examRepository.AddAsync(entity);
-                return await _examRepository.SaveAsync();
+                _examRepository.Add(entity);
+                return  _examRepository.Save();
             }
             catch (Exception ex)
             {
@@ -53,50 +54,60 @@ namespace SchoolExam.Infrastructure.Services
         {
             try
             {
-                var value = _examRepository.GetAll().Include(s=>s.Lesson).Include(s=>s.Student).Select(s => new ExamResponseDTO
+                var exams = _examRepository.GetAll().Include(s=>s.Lesson)
+                    .Include(s=>s.Student).Select(s => new ExamResponseDTO
+                                {
+                                    Id= s.Id,
+                                    ResultGrade = s.ResultGrade,
+                                    ExamDate = s.ExamDate,
+                                    LessonName = s.Lesson.Name,
+                                    StudentFullName = $"{s.Student.FirstName} {s.Student.LastName}",
+                                });
+                return exams.ToList();
+
+            }
+            catch (Exception ex)
+            {
+                throw new CustomApplicationExeption(ex.Message); ;
+            }
+        }
+
+        public  ExamResponseDTO GetById(int id)
+        {
+            try
+            {
+                var entity =  _examRepository.GetWhere(x=>x.Id==id)
+                    .Include(s=>s.Student).Select(s => new ExamResponseDTO
+				                {
+					                Id = s.Id,
+					                ResultGrade = s.ResultGrade,
+					                ExamDate = s.ExamDate,
+					                LessonName = s.Lesson.Name,
+					                StudentFullName = $"{s.Student.FirstName} {s.Student.LastName}",
+				                }).FirstOrDefault();
+                
+                return entity;
+            }
+            catch (Exception ex)
+            {
+                throw new CustomApplicationExeption(ex.Message); ;
+            }
+        }
+
+
+        public async Task<bool> Update(ExamUpdateDTO update)
+        {
+            try
+            {
+                var exam = await _examRepository.GetByIdAsync(update.Id);
+                if (exam is not null)
                 {
-                    Id= s.Id,
-                    ResultGrade = s.ResultGrade,
-                    ExamDate = s.ExamDate,
-                    LessonName = s.Lesson.Name,
-                    StudentFullName = s.Student.LastName
-                });
-                return value.ToList();
-
-            }
-            catch (Exception ex)
-            {
-                throw new CustomApplicationExeption(ex.Message); ;
-            }
-        }
-
-        public ExamCreateDTO GetById(int id)
-        {
-            try
-            {
-                var entity = _examRepository.GetByIdAsync(id);
-                return _mapper.Map<ExamCreateDTO>(entity);
-            }
-            catch (Exception ex)
-            {
-                throw new CustomApplicationExeption(ex.Message); ;
-            }
-        }
-
-        public ExamCreateDTO Initialize(ExamCreateDTO model)
-        {
-            model.Lessons = _lessonService.GetAll();
-            model.Students = _studentService.GetAll();
-
-           return model;
-        }
-
-        public async Task<bool> Update(ExamCreateDTO addDTO)
-        {
-            try
-            {
-                var entity = _mapper.Map<Exam>(addDTO);
-                _examRepository.Update(entity);
+                    exam.ExamDate = update.ExamDate;
+                    exam.ResultGrade = update.ResultGrade;
+                    exam.LessonId = update.LessonId;
+                    exam.StudentId = update.StudentId;
+                }
+                _examRepository.Update(exam);
                 return await _examRepository.SaveAsync();
             }
             catch (Exception ex)

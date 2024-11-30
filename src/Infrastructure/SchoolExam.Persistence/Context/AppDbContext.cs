@@ -40,12 +40,7 @@ namespace SchoolExam.Persistence.Context
 				.HasForeignKey(e => e.StudentId)
 				.OnDelete(DeleteBehavior.NoAction);
 
-			modelBuilder.Entity<Lesson>()
-				.HasOne(l => l.Teacher)
-				.WithOne(t => t.Lesson)
-				.HasForeignKey<Lesson>(l => l.TeacherId)
-				.OnDelete(DeleteBehavior.Restrict);
-
+		
 			modelBuilder.Entity<ClassRoom>()
 				.Property(c => c.Number)
 			.HasPrecision(18, 2);

@@ -1,4 +1,5 @@
 ﻿
+using SchoolExam.Application.DTOs.ClassRoom;
 using SchoolExam.Application.DTOs.Student;
 
 namespace SchoolExam.Application.Interfaces.Services
@@ -7,9 +8,8 @@ namespace SchoolExam.Application.Interfaces.Services
     {
         public ICollection<StudentResponseDTO> GetAll();
         public Task<StudentCreateDTO> GetById(int id);
-        public Task<bool> Add(StudentCreateDTO addDTO);
-        public Task<bool> Update(StudentCreateDTO addDTO);
+        public bool Add(StudentCreateDTO addDTO);
+        public Task<bool> Update(StudentUpdateDTO update);
         public Task<bool> Delete(int id);
-        public StudentCreateDTO Initialize(StudentCreateDTO model);
     }
 }

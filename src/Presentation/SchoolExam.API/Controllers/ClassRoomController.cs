@@ -20,31 +20,38 @@ namespace SchoolExam.API.Controllers
 		[HttpGet]
 		public IActionResult GetAll()
 		{
-			var data = _classRoomService.GetAll();
-			return Ok(data);
+			var datas = _classRoomService.GetAll();
+			return Ok(datas);
 		}
 
 		[HttpGet("{id}")]
-		public string Get(int id)
+		public async Task<IActionResult> GetById(int id)
 		{
-			return "value";
+			var data = await _classRoomService.GetById(id);
+
+			return Ok(data);
 		}
 
 		[HttpPost]
-		public IActionResult Create( ClassRoomCreateDTO create)
+		public IActionResult Create([FromForm] ClassRoomCreateDTO create)
 		{
 			var data = _classRoomService.Add(create);
 			return Ok();
 		}
 
-		[HttpPut("{id}")]
-		public void Put(int id, [FromBody] string value)
+		[HttpPut()]
+		public async Task<IActionResult> Update([FromForm] ClassRoomUpdateDTO create)
 		{
+			await _classRoomService.Update(create);
+			return Ok();
 		}
 
 		[HttpDelete("{id}")]
-		public void Delete(int id)
+		public async Task<IActionResult> Delete(int id)
 		{
+			await _classRoomService.Delete(id);
+
+			return Ok();
 		}
 	}
 }

@@ -33,7 +33,8 @@ namespace SchoolExam.Infrastructure.Repositories
 			var query = Table.AsQueryable();
 			if (!tracking)
 				query = Table.AsNoTracking();
-			return await query.FirstOrDefaultAsync(data => data.Id == id);
+
+			return await query.FirstOrDefaultAsync(data => data.Id == id);	
 		}
 
 		public async Task<T> GetSingleAsync(Expression<Func<T, bool>> method, bool tracking = true)

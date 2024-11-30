@@ -31,19 +31,6 @@ namespace SchoolExam.Infrastructure.Services
             }
         }
 
-        public async Task<bool> Delete(int id)
-        {
-            try
-            {
-                var model = await _classRoomRepository.GetByIdAsync(id);
-				_classRoomRepository.Remove(model);
-				return await _classRoomRepository.SaveAsync();
-			}
-            catch (Exception ex)
-            {
-                throw new CustomApplicationExeption(ex.Message); ;
-            }
-        }
 
         public ICollection<ClassRoomResponseDTO> GetAll()
         {
@@ -58,32 +45,51 @@ namespace SchoolExam.Infrastructure.Services
             }
         }
 
-        public async Task<ClassRoomCreateDTO> GetById(int id)
+        public async Task<ClassRoomResponseDTO> GetById(int id)
         {
             try
             {
                 var entity =await _classRoomRepository.GetByIdAsync(id);
-                return _mapper.Map<ClassRoomCreateDTO>(entity);
-            }
+                return _mapper.Map<ClassRoomResponseDTO>(entity);
+            }   
             catch (Exception ex)
             {
                 throw new CustomApplicationExeption(ex.Message); ;
             }
         }
 
-        public async Task<bool> Update(ClassRoomCreateDTO addDTO)
+        public async Task<bool> Update(ClassRoomUpdateDTO update)
         {
             try
             {
-                var entity = _mapper.Map<ClassRoom>(addDTO);
-                _classRoomRepository.Update(entity);
+                var entity =await _classRoomRepository.GetByIdAsync(update.Id);
+                if (entity!=null)
+                {
+                    entity.Number = update.Number;
+                    entity.Name = update.Name;
+                        
+                }
 
-				return await _classRoomRepository.SaveAsync();
+				return  _classRoomRepository.Save();
             }
             catch (Exception ex)
             {
                 throw new CustomApplicationExeption(ex.Message); ;
             }
         }
-    }
+
+		public async Task<bool> Delete(int id)
+		{
+			try
+			{
+				var model = await _classRoomRepository.GetByIdAsync(id);
+				_classRoomRepository.Remove(model);
+				return await _classRoomRepository.SaveAsync();
+			}
+			catch (Exception ex)
+			{
+				throw new CustomApplicationExeption(ex.Message); ;
+			}
+		}
+	}
 }

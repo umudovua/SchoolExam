@@ -7,9 +7,8 @@ namespace SchoolExam.Application.Interfaces.Services
     {
         public ICollection<LessonResponseDTO> GetAll();
         public Task<LessonCreateDTO> GetById(int id);
-        public Task<bool> Add(LessonCreateDTO addDTO);
-        public Task<bool> Update(LessonCreateDTO addDTO);
+        public bool Add(LessonCreateDTO addDTO);
+        public Task<bool> Update(LessonUpdateDTO update);
         public Task<bool> Delete(int id);
-        public LessonCreateDTO Initialize(LessonCreateDTO model);
     }
 }
